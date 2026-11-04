@@ -1,0 +1,124 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyOTAE74Np5CE3lY6ZlC76B7",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/abhinaypagadala30-lgtm/Python-mini-projects/blob/main/budget__analyzer\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "SQ4gO_dDmcik",
+        "outputId": "524e1fd5-9ea2-4f9c-fb0b-024aa9ea7cc0"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "====== BUDGET REPORT ======\n",
+            "         Date  Category  Amount\n",
+            "0  04-11-2026        PG    6000\n",
+            "1  04-11-2026      Food    2500\n",
+            "2  04-11-2026       Bus    1000\n",
+            "3  04-11-2026  Recharge     300\n",
+            "4  04-11-2026      Food    1200\n",
+            "\n",
+            "Total Expense: Rs.11000\n",
+            "Average Expense: Rs.2200.00\n",
+            "Highest Expense: Rs.6000\n",
+            "Lowest Expense: Rs.300\n",
+            "\n",
+            "--- Category Wise Total ---\n",
+            "Category\n",
+            "Bus         1000\n",
+            "Food        3700\n",
+            "PG          6000\n",
+            "Recharge     300\n",
+            "Name: Amount, dtype: int64\n",
+            "\n",
+            "Smart Advice: You are spending most on 'PG'.\n",
+            "If you reduce 'PG' by 20% next month, you can save Rs.2200.\n",
+            "\n",
+            "Salary: Rs.20000\n",
+            "Remaining Money: Rs.9000\n",
+            "Super! You are saving well.\n"
+          ]
+        }
+      ],
+      "source": [
+        "# Fresher Budget Analyzer - Google Colab Version\n",
+        "# Pandas + Numpy - No Input Needed\n",
+        "\n",
+        "import pandas as pd\n",
+        "import numpy as np\n",
+        "\n",
+        "# Sample Data - Hyderabad Fresher Expenses\n",
+        "data = {\n",
+        "    \"Date\": [\"04-11-2026\", \"04-11-2026\", \"04-11-2026\", \"04-11-2026\", \"04-11-2026\"],\n",
+        "    \"Category\": [\"PG\", \"Food\", \"Bus\", \"Recharge\", \"Food\"],\n",
+        "    \"Amount\": [6000, 2500, 1000, 300, 1200]\n",
+        "}\n",
+        "\n",
+        "# Creating DataFrame with Pandas\n",
+        "df = pd.DataFrame(data)\n",
+        "\n",
+        "print(\"====== BUDGET REPORT ======\")\n",
+        "print(df)\n",
+        "\n",
+        "# Calculations with Numpy\n",
+        "total = np.sum(df[\"Amount\"])\n",
+        "average = np.mean(df[\"Amount\"])\n",
+        "highest = np.max(df[\"Amount\"])\n",
+        "lowest = np.min(df[\"Amount\"])\n",
+        "\n",
+        "print(f\"\\nTotal Expense: Rs.{total}\")\n",
+        "print(f\"Average Expense: Rs.{average:.2f}\")\n",
+        "print(f\"Highest Expense: Rs.{highest}\")\n",
+        "print(f\"Lowest Expense: Rs.{lowest}\")\n",
+        "\n",
+        "# Category Wise Total with Pandas groupby - This is what Recruiter will ask\n",
+        "print(\"\\n--- Category Wise Total ---\")\n",
+        "category_wise = df.groupby(\"Category\")[\"Amount\"].sum()\n",
+        "print(category_wise)\n",
+        "\n",
+        "# Smart Advice\n",
+        "top_category = df.groupby(\"Category\")[\"Amount\"].sum().idxmax()\n",
+        "print(f\"\\nSmart Advice: You are spending most on '{top_category}'.\")\n",
+        "print(f\"If you reduce '{top_category}' by 20% next month, you can save Rs.{total * 0.20:.0f}.\")\n",
+        "\n",
+        "# Salary Comparison\n",
+        "salary = 20000\n",
+        "remaining = salary - total\n",
+        "print(f\"\\nSalary: Rs.{salary}\")\n",
+        "print(f\"Remaining Money: Rs.{remaining}\")\n",
+        "print(\"Super! You are saving well.\" if remaining > 5000 else \"Careful! Your savings are low.\")"
+      ]
+    }
+  ]
+}
